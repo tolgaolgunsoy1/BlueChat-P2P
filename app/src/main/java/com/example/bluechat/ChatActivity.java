@@ -245,21 +245,31 @@ public class ChatActivity extends Activity {
 
     private void loadMessageHistory() {
         if (connectedDeviceAddress != null) {
-            new LoadMessagesTask().execute(connectedDeviceAddress);
+            new LoadMessagesTask(messages, messageAdapter, messageRecyclerView).execute(connectedDeviceAddress);
         }
     }
 
     private void saveMessageToDatabase(com.example.bluechat.Message message) {
         if (connectedDeviceAddress != null) {
             MessageEntity entity = new MessageEntity(message.getText(), message.isSent(), connectedDeviceAddress);
-            new SaveMessageTask().execute(entity);
+            new SaveMessageTask(database).execute(entity);
         }
     }
 
-    private class LoadMessagesTask extends AsyncTask<String, Void, List<MessageEntity>> {
+    private static class LoadMessagesTask extends AsyncTask<String, Void, List<MessageEntity>> {
+        private final List<com.example.bluechat.Message> messages;
+        private final MessageAdapter messageAdapter;
+        private final RecyclerView messageRecyclerView;
+
+        LoadMessagesTask(List<com.example.bluechat.Message> messages, MessageAdapter messageAdapter, RecyclerView messageRecyclerView) {
+            this.messages = messages;
+            this.messageAdapter = messageAdapter;
+            this.messageRecyclerView = messageRecyclerView;
+        }
+
         @Override
         protected List<MessageEntity> doInBackground(String... params) {
-            return database.messageDao().getMessagesForDevice(params[0]);
+            return DatabaseHelper.getInstance(null).messageDao().getMessagesForDevice(params[0]);
         }
 
         @Override
@@ -275,7 +285,13 @@ public class ChatActivity extends Activity {
         }
     }
 
-    private class SaveMessageTask extends AsyncTask<MessageEntity, Void, Void> {
+    private static class SaveMessageTask extends AsyncTask<MessageEntity, Void, Void> {
+        private final AppDatabase database;
+
+        SaveMessageTask(AppDatabase database) {
+            this.database = database;
+        }
+
         @Override
         protected Void doInBackground(MessageEntity... params) {
             database.messageDao().insert(params[0]);
