@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Blue Gradient Dark Theme -->
+    <!-- Primary -->
+    <color name="md_theme_dark_primary">#2196F3</color>
+    <color name="md_theme_dark_onPrimary">#0a0e27</color>
+    <color name="md_theme_dark_primaryContainer">#1976D2</color>
+    <color name="md_theme_dark_onPrimaryContainer">#FFFFFF</color>
+
+    <!-- Secondary -->
+    <color name="md_theme_dark_secondary">#64B5F6</color>
+    <color name="md_theme_dark_onSecondary">#0a0e27</color>
+    <color name="md_theme_dark_secondaryContainer">#0d47a1</color>
+    <color name="md_theme_dark_onSecondaryContainer">#BBDEFB</color>
+
+    <!-- Tertiary -->
+    <color name="md_theme_dark_tertiary">#90CAF9</color>
+    <color name="md_theme_dark_onTertiary">#0a0e27</color>
+    <color name="md_theme_dark_tertiaryContainer">#1976D2</color>
+    <color name="md_theme_dark_onTertiaryContainer">#FFFFFF</color>
+
+    <!-- Error -->
+    <color name="md_theme_dark_error">#EF5350</color>
+    <color name="md_theme_dark_errorContainer">#D32F2F</color>
+    <color name="md_theme_dark_onError">#FFFFFF</color>
+    <color name="md_theme_dark_onErrorContainer">#FFCDD2</color>
+
+    <!-- Surface & Background -->
+    <color name="md_theme_dark_background">#0a0e27</color>
+    <color name="md_theme_dark_onBackground">#FFFFFF</color>
+    <color name="md_theme_dark_surface">#1a237e</color>
+    <color name="md_theme_dark_onSurface">#FFFFFF</color>
+    <color name="md_theme_dark_surfaceVariant">#0d47a1</color>
+    <color name="md_theme_dark_onSurfaceVariant">#BBDEFB</color>
+
+    <!-- Outline -->
+    <color name="md_theme_dark_outline">#64B5F6</color>
+    <color name="md_theme_dark_outlineVariant">#90CAF9</color>
+
+    <!-- Surface Containers -->
+    <color name="md_theme_dark_surfaceContainerLowest">#0a0e27</color>
+    <color name="md_theme_dark_surfaceContainerLow">#1a237e</color>
+    <color name="md_theme_dark_surfaceContainer">#0d47a1</color>
+    <color name="md_theme_dark_surfaceContainerHigh">#1976D2</color>
+    <color name="md_theme_dark_surfaceContainerHighest">#2196F3</color>
+
+    <!-- Custom status colors -->
+    <color name="md_theme_dark_success">#81C784</color>
+    <color name="md_theme_dark_warning">#FFB74D</color>
+
+    <!-- Aliases used across app (Dark) -->
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorPrimaryLight">#64B5F6</color>
+    <color name="colorPrimaryAlt">#90CAF9</color>
+    <color name="colorAccent">#64B5F6</color>
+
+    <color name="colorSuccess">#81C784</color>
+    <color name="colorWarning">#FFB74D</color>
+    <color name="colorError">#EF5350</color>
+    <color name="colorInfo">#90CAF9</color>
+
+    <color name="colorBackground">#0a0e27</color>
+    <color name="colorCard">#1a237e</color>
+    <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="colorTextSecondary">#BBDEFB</color>
+    <color name="colorBorder">#64B5F6</color>
+    <color name="colorSurfaceElevated">#0d47a1</color>
+
+    <!-- Message bubbles mapped to dark palette -->
+    <color name="msgSentStart">#2196F3</color>
+    <color name="msgSentEnd">#1976D2</color>
+    <color name="msgReceivedBg">#1a237e</color>
+    <color name="msgSentText">#0a0e27</color>
+    <color name="msgReceivedText">#FFFFFF</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="scrim">#0a0e27</color>
+    <color name="shadow">#000000</color>
+</resources>

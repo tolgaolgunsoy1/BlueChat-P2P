@@ -2,7 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?attr/colorSurface">
+
+    <!-- Chat header with gradient and connection badge -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/bg_header_gradient"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/chat_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BlueChat"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/connection_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kopuk"
+            android:textColor="?attr/colorOnSurface"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_alignParentEnd="true"
+            android:background="@android:color/transparent" />
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/message_recycler_view"
@@ -20,17 +52,34 @@
         <EditText
             android:id="@+id/message_edit_text"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:hint="@string/type_a_message"
+            android:hint="@string/type_message"
             android:inputType="text"
-            android:autofillHints="text" />
+            android:autofillHints="@string/autofill_message"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@drawable/bg_input" />
 
-        <Button
+        <ImageButton
+            android:id="@+id/attach_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_attach"
+            android:tint="?attr/colorOnSurface"
+            android:contentDescription="Dosya Ekle"
+            android:background="@drawable/bg_attach_button"
+            android:layout_marginLeft="8dp" />
+
+        <ImageButton
             android:id="@+id/send_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/send" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_send"
+            android:tint="?attr/colorOnSurface"
+            android:contentDescription="Gönder"
+            android:background="@drawable/bg_send_button"
+            android:layout_marginLeft="8dp" />
 
     </LinearLayout>
 

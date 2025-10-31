@@ -1,14 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BlueChat</string>
-    <string name="none_paired">No devices have been paired</string>
-    <string name="none_found">No devices found</string>
-    <string name="title_not_connected">Not connected</string>
-    <string name="title_connecting">Connecting...</string>
-    <string name="title_connected_to">Connected to %s</string>
-    <string name="select_device">Select a device to connect</string>
-    <string name="scanning">Scanning for devices…</string>
-    <string name="not_connected">You are not connected to a device</string>
-    <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>
-    <string name="type_a_message">Type a message</string>
-    <string name="send">Send</string>
+    <string name="none_paired">Eşleşmiş cihaz yok</string>
+    <string name="none_found">Cihaz bulunamadı</string>
+    <string name="title_not_connected">Bağlı değil</string>
+    <string name="title_connecting">Bağlanıyor…</string>
+    <string name="title_connected_to">%s ile bağlı</string>
+    <string name="select_device">Bağlanmak için cihaz seçin</string>
+    <string name="scanning">Cihazlar aranıyor…</string>
+    <string name="not_connected">Herhangi bir cihaza bağlı değilsiniz</string>
+    <string name="bt_not_enabled_leaving">Bluetooth etkinleştirilmedi. Uygulamadan çıkılıyor.</string>
+    <string name="type_a_message">Mesaj yazın</string>
+    <string name="send">Gönder</string>
+    <string name="paired_devices">Eşleşmiş Cihazlar</string>
+    <string name="other_available_devices">Diğer Cihazlar</string>
+    <string name="scan_devices_button">📡 Cihaz Ara</string>
+    <string name="make_discoverable_button">👁 Görünür Ol</string>
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_theme">Koyu Mod</string>
+    <string name="app_logo">Uygulama Logosu</string>
+    <string name="subtitle">Bluetooth üzerinden mesajlaşın</string>
+    <string name="scan_devices">Cihaz Ara</string>
+    <string name="make_visible">Görünür Ol</string>
+    <string name="recent_chats">Son Sohbetler</string>
+    <string name="bluetooth_not_supported">Bluetooth desteklenmiyor</string>
+    <string name="permissions_granted">İzinler verildi</string>
+    <string name="bluetooth_permissions_required">Bluetooth izinleri gerekli</string>
+    <string name="nearby_devices">Yakındaki Cihazlar</string>
+    <string name="searching">Aranıyor…</string>
+    <string name="no_devices_found">Cihaz bulunamadı</string>
+    <string name="type_message">Mesaj yazın…</string>
+    <string name="connected">Bağlandı</string>
+    <string name="disconnected">Bağlantı kesildi</string>
+    <string name="autofill_message">Mesaj</string>
+    <string name="bluetooth_status">Bluetooth Aktif</string>
+    <string name="bluetooth_toggle">Bluetooth</string>
+    <string name="public_chat">Herkese Açık Sohbet</string>
+    <string name="edit_nickname">Takma Ad Düzenle</string>
+    <string name="enter_nickname">Takma ad girin:</string>
+    <string name="bluetooth_on">Bluetooth Açık</string>
+    <string name="bluetooth_off">Bluetooth Kapalı</string>
+    <string name="nickname_saved">Takma ad kaydedildi</string>
+    <string name="public_chat_title">Herkese Açık Sohbet</string>
+    <string name="public_chat_connected">Bağlı (Yerel)</string>
+    <string name="copied_to_clipboard">Panoya kopyalandı</string>
+    <string name="device_selection_title">Cihaz Seçimi</string>
+    <string name="paired_devices_title">Kayıtlı Cihazlar</string>
+    <string name="new_devices_title">Yeni Cihaz Ara</string>
+    <string name="no_paired_devices">Kayıtlı cihaz bulunamadı</string>
+    <string name="scan_again">Tekrar Tara</string>
+    <string name="device_search_subtitle">Yakındaki Bluetooth cihazlarını tarayıp bağlanın.</string>
+    <string name="scan_button">🔄 Tara</string>
+    <string name="stop_scan_button">Durdur</string>
+    <string name="scanning_status">Cihazlar aranıyor...</string>
+    <string name="scan_stopped_status">Tarama durduruldu</string>
+    <string name="permission_warning">⚠️ Bluetooth izni gerekli</string>
+    <string name="recent_connections">📜 Son Bağlantılar</string>
+    <string name="no_devices_found_title">Cihaz bulunamadı</string>
+    <string name="retry_scan">🔁 Yeniden Tara</string>
+    <string name="connecting_toast">Cihaza bağlanılıyor...</string>
+    <string name="connected_toast">✅ %s bağlı!</string>
+    <string name="connection_failed_toast">❌ Bağlantı başarısız – tekrar dene</string>
+    <string name="device_connected">Bağlandı</string>
+    <string name="device_connect">Bağlan</string>
+    <string name="device_disconnect">Bağlantıyı Kes</string>
+    <string-array name="device_filters">
+        <item>Tümü</item>
+        <item>Telefonlar</item>
+        <item>Bilgisayarlar</item>
+    </string-array>
 </resources>

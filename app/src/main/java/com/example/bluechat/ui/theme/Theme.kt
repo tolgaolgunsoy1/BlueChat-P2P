@@ -40,6 +40,7 @@ fun BlueChatTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    // Note: darkTheme can be overridden by passing a value from activity preferences
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cihaz Seç</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #409CFF;
+            --primary-dark: #1A2F6B;
+            --primary-container: #E0F2FF;
+            --on-primary: #FFFFFF;
+            --secondary: #3B8DFF;
+            --accent: #5EADFF;
+            --background: #F5F7FA;
+            --surface: #FFFFFF;
+            --surface-variant: #F0F4F8;
+            --surface-elevated: #FFFFFF;
+            --on-surface: #1C1B1F;
+            --on-surface-variant: #5A6B7D;
+            --outline: #CBD5E1;
+            --outline-variant: #E2E8F0;
+            --success: #10B981;
+            --gradient-start: #409CFF;
+            --gradient-end: #3B8DFF;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #5EADFF;
+                --primary-dark: #003C8F;
+                --primary-container: #1E3A5F;
+                --on-primary: #001B3D;
+                --secondary: #7BC4FF;
+                --accent: #A5C8FF;
+                --background: #0F1419;
+                --surface: #1A1F26;
+                --surface-variant: #242931;
+                --surface-elevated: #202530;
+                --on-surface: #E6E9EF;
+                --on-surface-variant: #94A3B8;
+                --outline: #334155;
+                --outline-variant: #1E293B;
+                --success: #34D399;
+                --gradient-start: #5EADFF;
+                --gradient-end: #3B8DFF;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--background) 0%, var(--surface-variant) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--on-surface);
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .header {
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            color: var(--on-surface);
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header .time {
+            color: var(--on-surface-variant);
+            font-size: 14px;
+        }
+
+        .scan-section {
+            background: var(--surface-elevated);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid var(--outline-variant);
+            box-shadow: 0 4px 16px rgba(64, 156, 255, 0.08);
+        }
+
+        .scan-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .scan-text {
+            color: var(--on-surface);
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .scan-icon {
+            width: 24px;
+            height: 24px;
+            animation: spin 2s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .scan-button {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            color: var(--on-primary);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(64, 156, 255, 0.25);
+        }
+
+        .scan-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(64, 156, 255, 0.35);
+        }
+
+        .scan-button:active {
+            transform: translateY(0);
+        }
+
+        .section-title {
+            color: var(--on-surface);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .devices-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .device-card {
+            background: var(--surface-elevated);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--outline-variant);
+        }
+
+        .device-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(64, 156, 255, 0.15);
+            border-color: var(--accent);
+        }
+
+        .device-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(64, 156, 255, 0.25);
+        }
+
+        .device-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--on-primary);
+        }
+
+        .device-info {
+            flex: 1;
+        }
+
+        .device-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--on-surface);
+            margin-bottom: 4px;
+        }
+
+        .device-mac {
+            font-size: 13px;
+            color: var(--on-surface-variant);
+            font-family: 'Courier New', monospace;
+        }
+
+        .device-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .signal-strength {
+            display: flex;
+            gap: 2px;
+            align-items: flex-end;
+            height: 20px;
+        }
+
+        .signal-bar {
+            width: 4px;
+            background: var(--outline-variant);
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .signal-bar.active {
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .signal-bar:nth-child(1) { height: 6px; }
+        .signal-bar:nth-child(2) { height: 10px; }
+        .signal-bar:nth-child(3) { height: 14px; }
+        .signal-bar:nth-child(4) { height: 18px; }
+
+        .status-badge {
+            background: var(--success);
+            color: var(--on-primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-badge::before {
+            content: '✓';
+            font-size: 14px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--on-surface-variant);
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* Scanning animation */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .scanning .scan-icon {
+            animation: spin 1s linear infinite, pulse 2s ease-in-out infinite;
+        }
+
+        /* Ripple effect */
+        .device-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .device-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s, opacity 0.6s;
+        }
+
+        .device-card:active::after {
+            width: 300px;
+            height: 300px;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cihaz Seç</h1>
+            <div class="time">18:14</div>
+        </div>
+
+        <div class="scan-section" id="scanSection">
+            <div class="scan-header">
+                <div class="scan-text">
+                    <svg class="scan-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3" stroke="var(--secondary)"/>
+                        <circle cx="12" cy="12" r="7" stroke="var(--secondary)" opacity="0.5"/>
+                        <circle cx="12" cy="12" r="10" stroke="var(--secondary)" opacity="0.3"/>
+                    </svg>
+                    <span>Yakındaki Bluetooth cihazlarını tarayıp bağlanın.</span>
+                </div>
+            </div>
+            <button class="scan-button" onclick="scanDevices()">Tümünü Tara</button>
+        </div>
+
+        <div class="section-title">
+            📱 Son Bağlantılar
+        </div>
+
+        <div class="devices-list">
+            <div class="device-card" onclick="connectDevice('GS-BTS-2')">
+                <div class="device-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17.71 7.71L12 2h-1v7.59L6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 11 14.41V22h1l5.71-5.71-4.3-4.29 4.3-4.29zM13 5.83l1.88 1.88L13 9.59V5.83zm1.88 10.46L13 18.17v-3.76l1.88 1.88z"/>
+                    </svg>
+                </div>
+                <div class="device-info">
+                    <div class="device-name">GS-BTS-2</div>
+                    <div class="device-mac">41:42:A4:DD:31:BA</div>
+                </div>
+                <div class="device-status">
+                    <div class="signal-strength">
+                        <div class="signal-bar active"></div>
+                        <div class="signal-bar active"></div>
+                        <div class="signal-bar active"></div>
+                        <div class="signal-bar"></div>
+                    </div>
+                    <div class="status-badge">Eşleşmiş</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scanDevices() {
+            const scanSection = document.getElementById('scanSection');
+            scanSection.classList.add('scanning');
+
+            setTimeout(() => {
+                scanSection.classList.remove('scanning');
+                alert('Tarama tamamlandı!');
+            }, 3000);
+        }
+
+        function connectDevice(deviceName) {
+            alert(deviceName + ' cihazına bağlanılıyor...');
+        }
+
+        function showSettings() {
+            document.getElementById('mainScreen').style.display = 'none';
+            document.getElementById('settingsScreen').style.display = 'block';
+        }
+
+        function hideSettings() {
+            document.getElementById('settingsScreen').style.display = 'none';
+            document.getElementById('mainScreen').style.display = 'block';
+        }
+
+        function toggleSetting(settingId) {
+            const toggle = document.getElementById(settingId);
+            toggle.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

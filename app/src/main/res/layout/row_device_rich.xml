@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+    app:strokeColor="?attr/colorOutline"
+    app:strokeWidth="1dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="0dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:padding="10dp"
+        android:background="@drawable/bg_device_icon"
+        android:src="@drawable/ic_phone"
+        android:tint="?attr/colorOnSurface"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="12dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cihaz Adı"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-65 dBm • 00:11:22:33:44:55"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="12sp"
+            android:fontFamily="monospace"/>
+    </LinearLayout>
+
+    <!-- RSSI bars -->
+    <LinearLayout
+        android:id="@+id/rssi_container"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginRight="8dp">
+        <View android:id="@+id/bar1" android:layout_width="8dp" android:layout_height="12dp" android:layout_marginRight="2dp" android:background="?attr/colorOnSurfaceVariant"/>
+        <View android:id="@+id/bar2" android:layout_width="8dp" android:layout_height="16dp" android:layout_marginRight="2dp" android:background="?attr/colorOnSurfaceVariant"/>
+        <View android:id="@+id/bar3" android:layout_width="8dp" android:layout_height="20dp" android:layout_marginRight="2dp" android:background="?attr/colorOnSurfaceVariant"/>
+        <View android:id="@+id/bar4" android:layout_width="8dp" android:layout_height="24dp" android:layout_marginRight="2dp" android:background="?attr/colorOnSurfaceVariant"/>
+        <View android:id="@+id/bar5" android:layout_width="8dp" android:layout_height="28dp" android:background="?attr/colorOnSurfaceVariant"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/paired_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="✓ Eşleşmiş"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:background="@drawable/bg_chip_success"
+        android:visibility="gone"/>
+
+</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
