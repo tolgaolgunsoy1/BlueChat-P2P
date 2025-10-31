@@ -335,6 +335,11 @@ public class LoginActivity extends AppCompatActivity {
                 "            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);\n" +
                 "        }\n" +
                 "\n" +
+                "        .toggle-switch.disabled {\n" +
+                "            pointer-events: none;\n" +
+                "            opacity: 0.6;\n" +
+                "        }\n" +
+                "\n" +
                 "        .toggle-switch.active {\n" +
                 "            background: linear-gradient(135deg, #3b82f6, #2563eb);\n" +
                 "            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);\n" +
@@ -609,12 +614,15 @@ public class LoginActivity extends AppCompatActivity {
                 "            }\n" +
                 "        }\n" +
                 "\n" +
-                "        function toggleBluetooth() {\n" +
+        "        function toggleBluetooth() {\n" +
+                "            const toggle = document.getElementById('bluetoothToggle');\n" +
                 "            if (window.Android && window.Android.toggleBluetooth) {\n" +
+                "                toggle.classList.add('disabled');\n" +
                 "                window.Android.toggleBluetooth();\n" +
                 "                setTimeout(() => {\n" +
                 "                    if (window.Android && window.Android.isBluetoothEnabled) {\n" +
                 "                        updateBluetoothStatus(window.Android.isBluetoothEnabled());\n" +
+                "                        toggle.classList.remove('disabled');\n" +
                 "                    }\n" +
                 "                }, 500);\n" +
                 "            }\n" +
