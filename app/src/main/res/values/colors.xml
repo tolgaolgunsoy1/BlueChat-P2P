@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Blue Gradient Theme -->
+    <!-- Primary -->
+    <color name="md_theme_light_primary">#0d47a1</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#1a237e</color>
+    <color name="md_theme_light_onPrimaryContainer">#FFFFFF</color>
+
+    <!-- Secondary -->
+    <color name="md_theme_light_secondary">#1976D2</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#E3F2FD</color>
+    <color name="md_theme_light_onSecondaryContainer">#0d47a1</color>
+
+    <!-- Tertiary -->
+    <color name="md_theme_light_tertiary">#2196F3</color>
+    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_tertiaryContainer">#BBDEFB</color>
+    <color name="md_theme_light_onTertiaryContainer">#0d47a1</color>
+
+    <!-- Error -->
+    <color name="md_theme_light_error">#D32F2F</color>
+    <color name="md_theme_light_errorContainer">#FFCDD2</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_onErrorContainer">#D32F2F</color>
+
+    <!-- Surface & Background -->
+    <color name="md_theme_light_background">#0a0e27</color>
+    <color name="md_theme_light_onBackground">#FFFFFF</color>
+    <color name="md_theme_light_surface">#1a237e</color>
+    <color name="md_theme_light_onSurface">#FFFFFF</color>
+    <color name="md_theme_light_surfaceVariant">#0d47a1</color>
+    <color name="md_theme_light_onSurfaceVariant">#BBDEFB</color>
+
+    <!-- Outline -->
+    <color name="md_theme_light_outline">#64B5F6</color>
+    <color name="md_theme_light_outlineVariant">#90CAF9</color>
+
+    <!-- Surface Containers -->
+    <color name="md_theme_light_surfaceContainerLowest">#0a0e27</color>
+    <color name="md_theme_light_surfaceContainerLow">#1a237e</color>
+    <color name="md_theme_light_surfaceContainer">#0d47a1</color>
+    <color name="md_theme_light_surfaceContainerHigh">#1976D2</color>
+    <color name="md_theme_light_surfaceContainerHighest">#2196F3</color>
+
+    <!-- Custom status colors -->
+    <color name="md_theme_light_success">#4CAF50</color>
+    <color name="md_theme_light_warning">#FF9800</color>
+
+    <!-- Aliases used across app (Light) -->
+    <color name="colorPrimary">#0d47a1</color>
+    <color name="colorPrimaryDark">#0a0e27</color>
+    <color name="colorPrimaryLight">#1a237e</color>
+    <color name="colorPrimaryAlt">#2196F3</color>
+    <color name="colorAccent">#1976D2</color>
+
+    <color name="colorSuccess">#4CAF50</color>
+    <color name="colorWarning">#FF9800</color>
+    <color name="colorError">#D32F2F</color>
+    <color name="colorInfo">#2196F3</color>
+
+    <color name="colorBackground">#0a0e27</color>
+    <color name="colorCard">#1a237e</color>
+    <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="colorTextSecondary">#BBDEFB</color>
+    <color name="colorBorder">#64B5F6</color>
+    <color name="colorSurfaceElevated">#0d47a1</color>
+
+    <!-- Message bubbles mapped to new palette -->
+    <color name="msgSentStart">#2196F3</color>
+    <color name="msgSentEnd">#1976D2</color>
+    <color name="msgReceivedBg">#1a237e</color>
+    <color name="msgSentText">#FFFFFF</color>
+    <color name="msgReceivedText">#FFFFFF</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="scrim">#0a0e27</color>
+    <color name="shadow">#000000</color>
+    <color name="slate_400">#94a3b8</color>
+    <color name="slate_300">#cbd5e1</color>
+    <color name="slate_50">#f8fafc</color>
+    <color name="online_green">#10b981</color>
+    <color name="white_80">#E6FFFFFF</color>
+
+    <!-- New colors for device search screen -->
+    <color name="header_start">#3b82f6</color>
+    <color name="header_end">#2563eb</color>
+    <color name="device_icon_start">#eff6ff</color>
+    <color name="device_icon_end">#dbeafe</color>
+    <color name="device_item_border">#e0e7ff</color>
+    <color name="search_box_bg">#ffffff</color>
+    <color name="search_placeholder">#cbd5e1</color>
+    <color name="section_title">#64748b</color>
+    <color name="empty_text">#64748b</color>
+    <color name="empty_subtext">#94a3b8</color>
+</resources>
