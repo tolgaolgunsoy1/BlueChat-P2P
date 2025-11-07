@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Chat - Cihaz Bul</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #0a0e27;
+            color: #FFFFFF;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Background gradient */
+        .background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(13, 71, 161, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(25, 118, 210, 0.3) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        /* Scanning waves animation */
+        .scan-waves {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            display: none;
+            z-index: 1;
+        }
+
+        .scan-waves.active {
+            display: block;
+        }
+
+        .wave {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #2196F3;
+            border-radius: 50%;
+            opacity: 0;
+            animation: waveExpand 3s ease-out infinite;
+        }
+
+        .wave:nth-child(2) { animation-delay: 1s; }
+        .wave:nth-child(3) { animation-delay: 2s; }
+
+        @keyframes waveExpand {
+            0% {
+                transform: scale(0.3);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            background: linear-gradient(135deg, #0d47a1 0%, #1976D2 100%);
+            color: #FFFFFF;
+            padding: 50px 24px 30px;
+            border-radius: 0 0 35px 35px;
+            box-shadow: 0 10px 40px rgba(13, 71, 161, 0.3);
+            z-index: 10;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #FFFFFF;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .refresh-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #FFFFFF;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .refresh-button.spinning {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            letter-spacing: -1px;
+        }
+
+        .header-subtitle {
+            font-size: 15px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Content */
+        .content {
+            padding: 24px;
+            height: calc(100vh - 180px);
+            overflow-y: auto;
+            position: relative;
+            z-index: 5;
+            background: #0a0e27;
+        }
+
+        .content::-webkit-scrollbar {
+            width: 0;
+        }
+
+        /* Search Box - Styled like settings item */
+        .search-box {
+            background: #1a237e;
+            border-radius: 18px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            margin-bottom: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .search-box:hover {
+            transform: translateX(4px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3);
+            border-color: rgba(33, 150, 243, 0.5);
+        }
+
+        .search-icon {
+            font-size: 22px;
+            color: #BBDEFB;
+            flex-shrink: 0;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 16px;
+            color: #FFFFFF;
+            background: transparent;
+        }
+
+        .search-input::placeholder {
+            color: #90CAF9;
+        }
+
+        /* Scan Button - Styled like prominent settings item */
+        .scan-button {
+            background: #1a237e;
+            border-radius: 18px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 28px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #2196F3;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scan-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(33, 150, 243, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .scan-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(33, 150, 243, 0.3);
+            border-color: rgba(33, 150, 243, 0.5);
+        }
+
+        .scan-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .scan-button:active {
+            transform: scale(0.98);
+        }
+
+        .scan-button.scanning {
+            animation: pulse 2s ease-in-out infinite;
+            color: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+            }
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #BBDEFB;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            padding: 0 4px;
+            animation: slideUp 0.5s ease-out backwards;
+        }
+
+        /* Device Item - Styled like settings-item */
+        .device-item {
+            background: #1a237e;
+            border-radius: 18px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 10px;
+            animation: slideUp 0.5s ease-out backwards;
+        }
+
+        .device-item:nth-child(1) { animation-delay: 0.1s; }
+        .device-item:nth-child(2) { animation-delay: 0.2s; }
+        .device-item:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .device-item:active {
+            transform: scale(0.98);
+        }
+
+        .device-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3);
+            border-color: rgba(33, 150, 243, 0.5);
+        }
+
+        .device-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #1976D2, #0d47a1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .device-icon::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border: 2px solid #1a237e;
+            border-radius: 50%;
+        }
+
+        .device-icon.offline::after {
+            background: #757575;
+        }
+
+        .device-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .device-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 3px;
+        }
+
+        .device-status {
+            font-size: 13px;
+            color: #4CAF50;
+            font-weight: 500;
+        }
+
+        .device-status.offline {
+            color: #BBDEFB;
+        }
+
+        .device-meta {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .device-signal {
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: #64B5F6;
+        }
+
+        .device-distance {
+            font-size: 12px;
+            color: #90CAF9;
+            font-weight: 600;
+        }
+
+        /* Empty State - Styled like settings */
+        .empty-state {
+            text-align: center;
+            padding: 80px 24px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+            color: #BBDEFB;
+            animation: float 3s ease-in-out infinite;
+            display: block;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .empty-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+        }
+
+        .empty-subtext {
+            font-size: 14px;
+            color: #90CAF9;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="scan-waves" id="scanWaves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-top">
+            <button class="back-button" onclick="Android.goBack()">←</button>
+            <button class="refresh-button" id="refreshBtn" onclick="refreshDevices()">⟳</button>
+        </div>
+        <div class="header-title">Cihaz Bul</div>
+        <div class="header-subtitle">Bluetooth ile yakındaki cihazları keşfet</div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Search - As settings item -->
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <div class="settings-content">
+                <input type="text" class="search-input" placeholder="Cihaz adı veya ID ara..." oninput="filterDevices(this.value)">
+            </div>
+        </div>
+
+        <!-- Scan Button - As prominent item -->
+        <div class="scan-button" id="scanBtn" onclick="startScan()">
+            <span style="font-size: 22px;">📡</span>
+            <span id="scanText" class="settings-title">Cihazları Tara</span>
+        </div>
+
+        <!-- Devices Section -->
+        <div id="devicesContainer">
+            <div class="section-title">Yakındaki Cihazlar (<span id="deviceCount">0</span>)</div>
+
+            <!-- Devices will be populated here -->
+        </div>
+    </div>
+
+    <script>
+        const scanBtn = document.getElementById('scanBtn');
+        const scanText = document.getElementById('scanText');
+        const scanWaves = document.getElementById('scanWaves');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const devicesContainer = document.getElementById('devicesContainer');
+        const deviceCount = document.getElementById('deviceCount');
+
+        let devices = [];
+        let isScanning = false;
+
+        // Scan button functionality
+        function startScan() {
+            if (isScanning) return;
+
+            isScanning = true;
+            scanBtn.classList.add('scanning');
+            scanWaves.classList.add('active');
+            scanText.textContent = 'Taranıyor...';
+            refreshBtn.classList.add('spinning');
+
+            // Call Android to start discovery
+            if (window.Android && window.Android.startDiscovery) {
+                window.Android.startDiscovery();
+            }
+        }
+
+        function stopScan() {
+            isScanning = false;
+            scanBtn.classList.remove('scanning');
+            scanWaves.classList.remove('active');
+            scanText.textContent = 'Cihazları Tara';
+            refreshBtn.classList.remove('spinning');
+        }
+
+        // Refresh button
+        function refreshDevices() {
+            if (!isScanning) {
+                startScan();
+            }
+        }
+
+        // Filter devices
+        function filterDevices(searchTerm) {
+            const filtered = devices.filter(device =>
+                device.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                device.address.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            renderDevices(filtered);
+        }
+
+        // Render devices
+        function renderDevices(deviceList) {
+            const container = document.getElementById('devicesContainer');
+            const sectionTitle = container.querySelector('.section-title');
+
+            // Update count
+            deviceCount.textContent = deviceList.length;
+
+            // Clear existing devices (keep the title)
+            const existingItems = container.querySelectorAll('.device-item');
+            existingItems.forEach(item => item.remove());
+
+            if (deviceList.length === 0) {
+                // Show empty state
+                const emptyState = document.createElement('div');
+                emptyState.className = 'empty-state';
+                emptyState.innerHTML = `
+                    <div class="empty-icon">📡</div>
+                    <div class="empty-text">Cihaz Bulunamadı</div>
+                    <div class="empty-subtext">Yakınınızda Bluetooth cihazı yok veya tarama yapmadınız</div>
+                `;
+                container.appendChild(emptyState);
+                return;
+            }
+
+            // Add devices
+            deviceList.forEach((device, index) => {
+                const item = document.createElement('div');
+                item.className = 'device-item';
+                item.style.animationDelay = (index * 0.1) + 's';
+                item.onclick = () => selectDevice(device.address);
+
+                const icon = device.type === 'phone' ? '📱' :
+                           device.type === 'computer' ? '💻' :
+                           device.type === 'audio' ? '🔊' :
+                           device.type === 'watch' ? '⌚' :
+                           device.type === 'health' ? '❤️' : '📱';
+
+                item.innerHTML = `
+                    <div class="device-icon ${device.isOnline ? '' : 'offline'}">${icon}</div>
+                    <div class="device-info">
+                        <div class="device-name">${device.name}</div>
+                        <div class="device-status ${device.isOnline ? '' : 'offline'}">
+                            <span>${device.isOnline ? '● Aktif' : '○ Çevrimdışı'}</span>
+                        </div>
+                    </div>
+                    <div class="device-meta">
+                        <div class="device-signal">${device.signalStrength || '📶'}</div>
+                        <div class="device-distance">${device.distance || '--'}</div>
+                    </div>
+                `;
+
+                container.appendChild(item);
+            });
+        }
+
+        // Device selection
+        function selectDevice(address) {
+            if (window.Android && window.Android.selectDevice) {
+                window.Android.selectDevice(address);
+            }
+        }
+
+        // Android interface functions
+        function updateDevices(jsonDevices) {
+            try {
+                devices = JSON.parse(jsonDevices);
+                renderDevices(devices);
+            } catch (e) {
+                console.error('Error parsing devices:', e);
+            }
+        }
+
+        function addDevice(jsonDevice) {
+            try {
+                const device = JSON.parse(jsonDevice);
+                devices.push(device);
+                renderDevices(devices);
+            } catch (e) {
+                console.error('Error adding device:', e);
+            }
+        }
+
+        function onDiscoveryStarted() {
+            startScan();
+        }
+
+        function onDiscoveryFinished() {
+            stopScan();
+        }
+
+        // Back button
+        document.querySelector('.back-button').onclick = function() {
+            if (window.Android && window.Android.goBack) {
+                window.Android.goBack();
+            }
+        };
+
+        // Initial load
+        if (window.Android && window.Android.loadDevices) {
+            window.Android.loadDevices();
+        }
+    </script>
+</body>
+</html>
